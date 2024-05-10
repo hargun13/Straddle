@@ -4,6 +4,8 @@ const WatchlistModel = new mongoose.Schema({
     scriptId: { type: String, required: true, ref: "Scrip" },
     scriptName: { type: String },
     price: { type: Number },
+    lastPrice: {type: Number},
+    percentageChange: {type: Number},   
     userId: {
         type: String,
         required: true,

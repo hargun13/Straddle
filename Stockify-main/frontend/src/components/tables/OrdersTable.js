@@ -27,9 +27,11 @@ export default function OrdersTable({ status, refresh, setRefresh }) {
 
   const getOrders = async () => {
     const userId = JSON.parse(localStorage.getItem('cmUser')).userid;
+    // const userId = "66196a4c9f30ada269f75d16";
     setLoading(true);
     try {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/all?userId=${userId}&status=${status}`);
+      console.log(response)
       if (response.status === 200) {
         setLoading(false);
         setRefresh(false);

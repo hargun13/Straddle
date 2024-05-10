@@ -45,6 +45,7 @@ function Watchlist() {
             const response = await axios.get(`http://localhost:5000/api/scrip/search?scriptName=${inputStock}`);
             if (response.status === 200) {
                 setStocks(response.data.data);
+                console.log(stocks);
             }
         } catch (err) {
             console.log(err);
@@ -53,9 +54,16 @@ function Watchlist() {
     }
 
     const handleAddStockToWatchlist = async (stock) => {
+        console.log('Stock:', stock);
+        console.log('Percentage Change:', stock.percentageChange);
+        console.log('Last Price:', stock.lastPrice);
         const data = {
             userId: userId,
-            scriptId: stock._id
+            scriptId: stock._id,
+            percentageChange:stock.percentageChange,
+            lastPrice:stock.lastPrice
+
+
         }
         try {
             setLoadingId(stock._id);
@@ -190,7 +198,7 @@ function Watchlist() {
                                         return (
                                             <Item key={stock._id} >
                                                 <Stack direction="row" alignItems="center" justifyContent="space-between" >
-                                                    <Typography sx={{ color: '#000' }} >{stock.symbol}</Typography>
+                                                    <Typography sx={{ color: '#000' }} >{stock.scriptName}</Typography>
                                                     {
                                                         loadingId === stock._id ?
                                                         <Loading /> :
@@ -219,7 +227,7 @@ function Watchlist() {
                                                     onMouseOver={() => setHoverIndex(stock._id)}
                                                     onMouseLeave={() => setHoverIndex(-1)} >
                                                     <Grid item xs={8}>
-                                                        <Typography>{stock.scriptId.symbol}</Typography>
+                                                        <Typography>{stock.scriptName}{console.log(stock)}</Typography>
                                                     </Grid>
                                                     <Grid item xs={4}>
                                                         {
@@ -286,9 +294,10 @@ function Watchlist() {
                                                                     spacing={2}
                                                                 >
                                                                     <Typography sx={{
-                                                                        color: parseFloat(stock.scriptId.percentageChange) > 0 ? '#0ee07b' : '#f64d41'
-                                                                    }} >{stock.scriptId.percentageChange ? stock.scriptId.percentageChange : 0}%</Typography>
-                                                                    <Typography>{stock.scriptId.lastPrice ? stock.scriptId.lastPrice : 0}</Typography>
+                                                                        color: parseFloat(stock.percentageChange) > 0 ? '#0ee07b' : '#f64d41'
+                                                                    }} >{stock.percentageChange ? stock.percentageChange : 0}%</Typography>
+                                                                    {console.log(stock.percentageChange)}
+                                                                    <Typography>{stock.lastPrice ? stock.lastPrice : 0}</Typography>
                                                                 </Stack>
                                                         }
                                                     </Grid>

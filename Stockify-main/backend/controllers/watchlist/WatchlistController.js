@@ -52,7 +52,9 @@ module.exports.add_script_in_watchlist = async (req, res) => {
             userId,
             scriptId: scriptId,
             scriptName: script.scriptName,
-            price: 3012
+            price: script.high,
+            lastPrice: script.lastPrice,
+            percentageChange: script.percentageChange,
         });
         await watchlistScript.save();
         return res.status(200).json({

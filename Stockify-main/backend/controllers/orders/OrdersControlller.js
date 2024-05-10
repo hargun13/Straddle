@@ -9,6 +9,8 @@ module.exports.get_user_orders = async (req, res) => {
             userId: userId, 
             orderStatus: status.toLowerCase() === 'open' ? ['Pending'] : ['Executed','Rejected']  
         }).populate('scripId');
+
+        console.log(orders);
         
         return res.status(200).json({
             message: 'success',
