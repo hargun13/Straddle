@@ -1,7 +1,7 @@
 import React from 'react'
 import { useModuleContext } from './ModuleContext';
 
-
+//player.getCurrentTime()
 const CourseHero = () => {
 
     const { selectedVideo } = useModuleContext()

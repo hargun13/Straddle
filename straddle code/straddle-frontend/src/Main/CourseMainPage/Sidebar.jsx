@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { MdSlowMotionVideo } from 'react-icons/md';
-import { GoDotFill } from 'react-icons/go';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -9,12 +8,12 @@ import { useModuleContext } from './ModuleContext';
 import { Button } from '@mui/material';
 
 const Sidebar = ({ moduleId }) => {
-  const { moduleData, setModuleData, selectedVideo, setSelectedVideo } = useModuleContext();
+  const { moduleData, setModuleData, setSelectedVideo } = useModuleContext();
   
 
-    const handleVideoClick = (video) => {
-        setSelectedVideo(video);
-    };
+  const handleVideoClick = (video) => {
+    setSelectedVideo(video);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,17 +59,13 @@ const Sidebar = ({ moduleId }) => {
           <AccordionDetails>
             <ul>
               {Array.isArray(topic.videos) && topic.videos.map((video, vIndex) => (
-                <Button>
                 <li key={vIndex} onClick={() => handleVideoClick(video)} 
                 className="flex  items-center justify-start gap-3 cursor-pointer ">
-                    
-                        <MdSlowMotionVideo />
-                        <p>{video.title}</p>
-                        <GoDotFill size={10} className="text-[#D2D3D3]" />
-                        <p>play</p>
-                    
+                  <Button>
+                    <MdSlowMotionVideo className='mr-2' size={20}/>
+                    <p className='truncate'>{video.title}</p>
+                  </Button>
                 </li>
-                </Button>
               ))}
             </ul>
           </AccordionDetails>

@@ -12,12 +12,16 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 //image
 import logo from "../../Logos/straddleblack.png"
 
+import { useModuleContext } from './ModuleContext';
+
 
 
 const Topbar = () => {
 
     const [anchorE1, setAnchorE1] = useState(null);
     const [anchorE2, setAnchorE2] = useState(null);
+
+    const { moduleId } = useModuleContext(); 
 
     const handleClick1 = (event) => {
         setAnchorE1(event.currentTarget);
@@ -44,7 +48,21 @@ const Topbar = () => {
                 <p className='text-lg font-bold'>classroom</p>
             </a>
 
-            <p className='text-lg font-extrabold mr-5'>Intoduction to Finance - The Straddle Way!</p>
+            {moduleId === 1 && (
+                <p className='text-lg font-extrabold mr-5'>
+                    Intoduction to Finance - The Straddle Way!
+                </p>
+            )}
+            {moduleId === 2 && (
+                <p className='text-lg font-extrabold mr-5'>
+                    Intermediate Module
+                </p>
+            )}
+            {moduleId === 3 && (
+                <p className='text-lg font-extrabold mr-5'>
+                    The Pro Module
+                </p>
+            )}
 
             <div className='flex items-center justify-center gap-3'>
                 <IconButton><IoMdHelpCircle /></IconButton>
